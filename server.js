@@ -1,4 +1,5 @@
 var express = require('express');
+var handleBars = require('express-handlebars');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -28,6 +29,7 @@ var notificationController = require('./controllers/notifications');
 var authController = require('./controllers/auth')(db);
 
 var app = express();
+app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser());
@@ -35,15 +37,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: config.session }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.set('views', './views');
+app.engine('handlebars', handleBars({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
-app.get('/auth',passport.authenticate('google', { scope: [
-    config.providers.google.profileAP,
-    config.providers.google.emailAP
-]}), function(req, res) {});
-
-app.get('/auth/callback', passport.authenticate('google', { failureRedirect: '/auth/fail'}), authController.callback);
-app.get('/auth/fail', authController.fail);
-app.get('/auth/success', authController.success);
 
 app.param('project', function(req, res, next, project){
     req.collection = db.collection('notifications');
@@ -53,12 +50,38 @@ app.param('project', function(req, res, next, project){
 });
 
 /** Routing **/
-app.get('/:project/notifications', notificationController.findAll);
-app.get('/:project/notification/:id', notificationController.findOne);
-app.post('/:project/notification', notificationController.insert);
-app.post('/:project/notification/send/:id', notificationController.send);
-app.put('/:project/notification/:id', notificationController.update);
-app.delete('/:project/notification/:id', notificationController.delete);
+app.get('/', function(req, res) {
+    if (req.isAuthenticated()) {
+        res.redirect('/dashboard');
+    }
+
+    res.render('login');
+});
+
+app.get('/dashboard', function(req, res) {
+    res.send('hello dashboard');
+});
+
+app.get('/logout', authController.logout);
+
+
+app.get('/auth',passport.authenticate('google', { scope: [
+    config.providers.google.profileAP,
+    config.providers.google.emailAP
+]}), function(req, res) {});
+
+
+app.get('/auth/callback', passport.authenticate('google', { failureRedirect: '/auth/fail'}), authController.callback);
+app.get('/auth/fail', authController.fail);
+app.get('/auth/success', authController.success);
+
+
+app.get('/api/:project/notifications', notificationController.findAll);
+app.get('/api/:project/notification/:id', notificationController.findOne);
+app.post('/api/:project/notification', notificationController.insert);
+app.post('/api/:project/notification/send/:id', notificationController.send);
+app.put('/api/:project/notification/:id', notificationController.update);
+app.delete('/api/:project/notification/:id', notificationController.delete);
 
 /** Start Server **/
 app.listen(config.api.port);
