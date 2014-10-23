@@ -1,0 +1,25 @@
+{
+  "name": "centrl-admin",
+  "version": "0.0.1",
+  "homepage": "https://github.com/centrl/api",
+  "authors": [
+    "mikerudolph <itsmikerudolph@gmail.com>"
+  ],
+  "description": "Admin dashboard for centrl push notification service",
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "zurb/bower-foundation#~5.4.6"
+  }
+}

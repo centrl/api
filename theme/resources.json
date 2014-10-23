@@ -1,0 +1,14 @@
+{
+    "vendors": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/foundation/js/foundation.min.js",
+        "theme/js/app.js"
+    ],
+
+    "footer": [
+    ],
+
+    "header": [
+        "bower_components/modernizr/modernizr.js"
+    ]
+}
