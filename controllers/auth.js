@@ -73,6 +73,20 @@ module.exports = function(db) {
 
         fail: function(req, res) {
             res.send(':(');
+        },
+
+        logout: function(req, res) {
+            req.logout();
+
+            res.redirect('/');
+        },
+
+        ensureAuthenticated: function(req, res, next) {
+            if (req.isAuthenticated()) {
+                return next();
+            }
+
+            res.redirect('/');
         }
     };
 };
