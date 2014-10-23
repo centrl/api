@@ -1,0 +1,23 @@
+local:
+    providers:
+        google:
+            clientID:
+            clientSecret:
+            profileAP: https://www.googleapis.com/auth/userinfo.profile
+            emailAP: https://www.googleapis.com/auth/userinfo.email
+
+    auth:
+        callback: auth/callback
+
+    api:
+        port: 3000
+        host: localhost
+
+    db:
+        user:
+        pass:
+        url:
+        port:
+        name: centrl_staging
+
+    session:
