@@ -68,7 +68,7 @@ module.exports = function(db) {
         },
 
         success: function(req, res) {
-            res.send(req.user);
+            res.redirect('/dashboard');
         },
 
         fail: function(req, res) {
@@ -87,6 +87,14 @@ module.exports = function(db) {
             }
 
             res.redirect('/');
+        },
+
+        alreadyAuthed: function(req, res, next) {
+            if (req.isAuthenticated()) {
+                return res.redirect('/dashboard');
+            }
+
+            return next();
         }
     };
 };
