@@ -1,0 +1,25 @@
+body.login {
+    text-align: center;
+
+    .page-content {
+        height: 200px;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+
+    video#bgvideo {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+    }
+
+    h1, h3 {
+        color: #333;
+    }
+}
+

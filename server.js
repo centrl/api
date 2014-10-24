@@ -49,17 +49,19 @@ app.param('project', function(req, res, next, project){
     return next();
 });
 
-/** Routing **/
-app.get('/', function(req, res) {
-    if (req.isAuthenticated()) {
-        res.redirect('/dashboard');
-    }
-
-    res.render('login');
+app.use('/dashboard', function(req, res, next) {
+    res.locals.user = req.user;
+    res.locals.sess = req.session;
+    next();
 });
 
-app.get('/dashboard', function(req, res) {
-    res.send('hello dashboard');
+/** Routing **/
+app.get('/', authController.alreadyAuthed, function(req, res) {
+    res.render('login', {bodyClass: 'login'});
+});
+
+app.get('/dashboard', authController.ensureAuthenticated, function(req, res) {
+    res.render('dashboard', {layout: 'dashboard', bodyClass: 'dashboard'});
 });
 
 app.get('/logout', authController.logout);

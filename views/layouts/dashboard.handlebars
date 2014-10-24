@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Welcome</title>
+
+        <link rel="stylesheet" href="./dist/css/app.css">
+
+        <script src="./dist/js/app-header.min.js"></script>
+        <script src="//use.typekit.net/ano4gah.js"></script>
+        <script>try{Typekit.load();}catch(e){}</script>
+    </head>
+    <body class="{{bodyClass}}">
+        <div class="row full-width full-height">
+            <div class="side-navbar small-12 medium-2 large-2 columns">
+                <div class="user-card">
+                    {{#if user.picture}}
+                        <img class="user-photo" src="{{user.picture}}" alt="This is you!" />
+                    {{/if}}
+                    {{#if user.name}}
+                        <a href="#" class="user-name">{{user.name}}</a>
+                    {{/if}}
+                </div>
+
+                <div class="divider"></div>
+
+                <ul class="side-nav">
+                    <li><a href="javascript:void(0);" class="nav-heading">Main</a></li>
+                    <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                    <li><a href="#"><i class="fa fa-book"></i>Projects</a></li>
+                    <li><a href="#"><i class="fa fa-exchange"></i>Paths</a></li>
+                    <li><a href="#"><i class="fa fa-envelope-o"></i>Notifications</a></li>
+                </ul>
+
+                <div class="divider"></div>
+            </div>
+
+            <nav class="small-12 medium-10 large-10 columns top-bar top-navbar">
+                <ul class="title-area">
+                    <li class="name">
+                        <h1><a href="#">Centrl</a></h1>
+                    </li>
+                </ul>
+
+                <section class="top-bar-section">
+                    <ul class="right">
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </section>
+            </nav>
+
+            <div class="main-content small-12 medium-10 large-10 columns">
+                {{{body}}}
+            </div>
+        </div>
+        <script src="./dist/js/app-vendors.min.js"></script>
+    </body>
+</html>
