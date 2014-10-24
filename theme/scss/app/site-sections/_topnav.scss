@@ -1,0 +1,16 @@
+.top-navbar {
+    padding-top: 16px;
+    height: 80px;
+    background: #ffffff;
+    border-bottom: 2px solid $light-border;
+
+    .name {
+        h1 {
+            font-size: 1.5rem;
+        
+            a {
+                color: $medium-grey;
+            }
+        }
+    }
+}

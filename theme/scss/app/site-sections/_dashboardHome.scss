@@ -1,0 +1,12 @@
+.main-content {
+    background-color: $off-white;
+    height: 100%;
+    min-height: 100%;
+
+    .content-block {
+        header {
+            background-color: $blue-grey;
+            padding: 20px;
+        }
+    }
+}

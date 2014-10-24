@@ -1,0 +1,17 @@
+@mixin border-radius($radius) {
+    @each $vendor in $vendors {
+        #{$vendor}border-radius: $radius;
+    }
+}
+
+@mixin box-shadow($params, $inset: false) {
+    @if $inset {
+        @each $vendor in $vendors {
+            #{$vendor}box-shadow: inset $params;
+        }
+    } @else {
+        @each $vendor in $vendors {
+            #{$vendor}box-shadow: $params;
+        }
+    }
+}
